@@ -1,0 +1,16 @@
+[package]
+name = "blockchain-rust-scratch"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+
+
+
+[dependencies]
+time = "0.3.35"
+serde = "1.0.197"
+serde_derive = "1.0.197"
+serde_json = "1.0.115"
+sha2 = "0.10.8"
