@@ -52,6 +52,7 @@ impl Chain{
     pub fn generate_new_block(&mut self) ->bool{
         let header = Blockheader{
             timestamp:time::OffsetDateTime::now_utc().second() as i64,
+
             nonce:0,
             pre_hash:self.last_hash(),
             merkle:String::new(),
@@ -143,9 +144,11 @@ impl Chain{
     }
     pub fn hash<T:serde::Serialize>(item: &T) -> String{
         let input = serde_json::to_string(&item).unwrap();
-        let mut hasher = Sha256::default();
-        hasher.input(input.as_bytes());
-        let res = hasher.result();
+        let mut hasher = Sha256::new();
+        // hasher.digest(input.as_bytes());
+        hasher.update(input.as_bytes());
+        let res = hasher.finalize();
+        
         let vec_res = res.to_vec();
 
         Chain::hex_to_string(vec_res.as_slice())
